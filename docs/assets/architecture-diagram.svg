@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <defs>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="apiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="modelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1"/>
+    </linearGradient>
+    <style>
+      .flow-animation {
+        animation: flow 2s linear infinite;
+      }
+      @keyframes flow {
+        0% { stroke-dashoffset: 20; opacity: 0.3; }
+        50% { opacity: 1; }
+        100% { stroke-dashoffset: 0; opacity: 0.3; }
+      }
+      .pulse-box {
+        animation: pulse-box 3s ease-in-out infinite;
+      }
+      @keyframes pulse-box {
+        0%, 100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+        50% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)); }
+      }
+      .float {
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .spin-slow {
+        animation: spin 10s linear infinite;
+        transform-origin: center;
+      }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="900" height="500" fill="#0a0e1a"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="500" fill="url(#gridPattern)"/>
+
+  <!-- Título -->
+  <text x="450" y="40" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold" font-family="Arial">
+    🏗️ Arquitetura do Sistema
+  </text>
+
+  <!-- Camada 1: Fontes de Dados -->
+  <g transform="translate(50, 100)" class="float">
+    <rect x="0" y="0" width="160" height="140" rx="10" fill="#1a1a2e" stroke="#444" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" fill="#aaa" font-size="11" font-weight="bold" font-family="Arial">FONTES DE DADOS</text>
+
+    <!-- Twitter -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="55" height="40" rx="5" fill="#1da1f2" opacity="0.2" stroke="#1da1f2"/>
+      <text x="27" y="25" text-anchor="middle" fill="#1da1f2" font-size="10" font-family="Arial">Twitter</text>
+    </g>
+
+    <!-- Google -->
+    <g transform="translate(85, 40)">
+      <rect x="0" y="0" width="55" height="40" rx="5" fill="#4285f4" opacity="0.2" stroke="#4285f4"/>
+      <text x="27" y="25" text-anchor="middle" fill="#4285f4" font-size="9" font-family="Arial">Google</text>
+    </g>
+
+    <!-- File Upload -->
+    <g transform="translate(20, 90)">
+      <rect x="0" y="0" width="55" height="40" rx="5" fill="#38ef7d" opacity="0.2" stroke="#38ef7d"/>
+      <text x="27" y="25" text-anchor="middle" fill="#38ef7d" font-size="9" font-family="Arial">CSV/TXT</text>
+    </g>
+
+    <!-- API Direct -->
+    <g transform="translate(85, 90)">
+      <rect x="0" y="0" width="55" height="40" rx="5" fill="#667eea" opacity="0.2" stroke="#667eea"/>
+      <text x="27" y="25" text-anchor="middle" fill="#667eea" font-size="9" font-family="Arial">API</text>
+    </g>
+  </g>
+
+  <!-- Seta -->
+  <path d="M 220 170 L 260 170" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5" class="flow-animation"/>
+
+  <!-- Camada 2: Pré-processamento -->
+  <g transform="translate(270, 80)" class="float" style="animation-delay: 0.2s">
+    <rect x="0" y="0" width="140" height="180" rx="10" fill="#1a1a2e" stroke="#667eea" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" fill="#aaa" font-size="11" font-weight="bold" font-family="Arial">PRÉ-PROCESSAMENTO</text>
+
+    <!-- Steps -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="100" height="30" rx="5" fill="#2d2d44"/>
+      <text x="50" y="20" text-anchor="middle" fill="#fff" font-size="10" font-family="Arial">🧹 Limpeza</text>
+
+      <rect x="0" y="40" width="100" height="30" rx="5" fill="#2d2d44"/>
+      <text x="50" y="60" text-anchor="middle" fill="#fff" font-size="10" font-family="Arial">📝 Tokenização</text>
+
+      <rect x="0" y="80" width="100" height="30" rx="5" fill="#2d2d44"/>
+      <text x="50" y="100" text-anchor="middle" fill="#fff" font-size="10" font-family="Arial">⚖️ Normalização</text>
+    </g>
+  </g>
+
+  <!-- Seta -->
+  <path d="M 420 170 L 460 170" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5" class="flow-animation"/>
+
+  <!-- Camada 3: Modelos -->
+  <g transform="translate(470, 60)" class="pulse-box">
+    <rect x="0" y="0" width="180" height="220" rx="10" fill="url(#modelGrad)" opacity="0.15" stroke="#00f2fe" stroke-width="2"/>
+    <text x="90" y="25" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" font-family="Arial">⚡ MODELOS PLN</text>
+
+    <!-- Model cards -->
+    <g transform="translate(15, 40)">
+      <rect x="0" y="0" width="150" height="45" rx="6" fill="#1a3a4a"/>
+      <text x="75" y="20" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="Arial">VADER (Baseline)</text>
+      <text x="75" y="37" text-anchor="middle" fill="#888" font-size="9" font-family="Arial">Léxico PT-BR</text>
+
+      <rect x="0" y="55" width="150" height="45" rx="6" fill="#1a3a4a"/>
+      <text x="75" y="75" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="Arial">BERT / DeBERTa</text>
+      <text x="75" y="92" text-anchor="middle" fill="#888" font-size="9" font-family="Arial">Transformers</text>
+
+      <rect x="0" y="110" width="150" height="45" rx="6" fill="#1a3a4a"/>
+      <text x="75" y="130" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="Arial">LLM (GPT/Llama)</text>
+      <text x="75" y="147" text-anchor="middle" fill="#888" font-size="9" font-family="Arial">Few-shot / Zero-shot</text>
+    </g>
+
+    <!--loading ring -->
+    <circle class="spin-slow" cx="90" cy="200" r="12" fill="none" stroke="#00f2fe" stroke-width="2" stroke-dasharray="15,25"/>
+  </g>
+
+  <!-- Seta -->
+  <path d="M 660 170 L 700 170" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5" class="flow-animation"/>
+
+  <!-- Camada 4: Saída -->
+  <g transform="translate(710, 100)" class="float" style="animation-delay: 0.4s">
+    <rect x="0" y="0" width="170" height="140" rx="10" fill="#1a1a2e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="85" y="25" text-anchor="middle" fill="#aaa" font-size="11" font-weight="bold" font-family="Arial">SAÍDA</text>
+
+    <!-- JSON Output -->
+    <g transform="translate(15, 40)">
+      <rect x="0" y="0" width="140" height="85" rx="5" fill="#0d1117"/>
+      <text x="10" y="20" fill="#38ef7d" font-size="9" font-family="monospace">{</text>
+      <text x="20" y="35" fill="#667eea" font-size="8" font-family="monospace">"sentiment":</text>
+      <text x="90" y="35" fill="#f7b733" font-size="8" font-family="monospace">"positive"</text>
+      <text x="20" y="50" fill="#667eea" font-size="8" font-family="monospace">"confidence":</text>
+      <text x="95" y="50" fill="#38ef7d" font-size="8" font-family="monospace">0.94</text>
+      <text x="20" y="65" fill="#667eea" font-size="8" font-family="monospace">"model":</text>
+      <text x="70" y="65" fill="#f7b733" font-size="8" font-family="monospace">"vader-pt"</text>
+      <text x="10" y="80" fill="#38ef7d" font-size="9" font-family="monospace">}</text>
+    </g>
+  </g>
+
+  <!-- Camada Inferior: Dashboard + DB -->
+  <g transform="translate(300, 320)">
+    <!-- Dashboard -->
+    <g class="float" style="animation-delay: 0.6s">
+      <rect x="0" y="0" width="140" height="100" rx="10" fill="url(#dashBg)" stroke="#f5576c" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="Arial">📊 Dashboard</text>
+      <text x="70" y="50" text-anchor="middle" fill="#888" font-size="9" font-family="Arial">Streamlit/Dash</text>
+      <text x="70" y="75" text-anchor="middle" fill="#888" font-size="9" font-family="Arial">Plotly Charts</text>
+
+      <!-- Mini chart -->
+      <path d="M 30 85 L 50 75 L 70 80 L 90 65 L 110 70" fill="none" stroke="#38ef7d" stroke-width="2"/>
+    </g>
+
+    <!-- Seta para DB -->
+    <path d="M 150 50 L 180 50" stroke="#43e97b" stroke-width="2" stroke-dasharray="5,5"/>
+
+    <!-- Database -->
+    <g transform="translate(190, 10)" class="float" style="animation-delay: 0.8s">
+      <ellipse cx="40" cy="15" rx="40" ry="12" fill="#43e97b" opacity="0.3"/>
+      <ellipse cx="40" cy="30" rx="40" ry="12" fill="#43e97b" opacity="0.5"/>
+      <ellipse cx="40" cy="45" rx="40" ry="12" fill="#43e97b" opacity="0.7"/>
+      <ellipse cx="40" cy="60" rx="40" ry="12" fill="url(#dbGrad)"/>
+      <text x="40" y="40" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold" font-family="Arial">PostgreSQL</text>
+    </g>
+  </g>
+
+  <!-- Conexões verticais -->
+  <path d="M 560 290 L 560 320" stroke="#667eea" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.5"/>
+  <path d="M 370 270 L 370 320" stroke="#667eea" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.5"/>
+
+  <!-- Footer -->
+  <text x="450" y="470" text-anchor="middle" fill="#555" font-size="10" font-family="monospace">
+    FastAPI • Transformers • spaCy • PostgreSQL • Redis
+  </text>
+</svg>

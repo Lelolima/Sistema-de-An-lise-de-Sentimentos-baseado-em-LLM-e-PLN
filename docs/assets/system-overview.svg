@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <!-- Gradientes -->
+    <linearGradient id="apiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="modelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="dashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fc4a1a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f7b733;stop-opacity:1"/>
+    </linearGradient>
+
+    <!-- Animação de pulso -->
+    <style>
+      .pulse {
+        animation: pulse-animation 2s ease-in-out infinite;
+      }
+      @keyframes pulse-animation {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.8; }
+      }
+      .flow {
+        animation: flow-animation 1.5s linear infinite;
+      }
+      @keyframes flow-animation {
+        0% { stroke-dashoffset: 100; }
+        100% { stroke-dashoffset: 0; }
+      }
+      .float {
+        animation: float-animation 3s ease-in-out infinite;
+      }
+      @keyframes float-animation {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .blink {
+        animation: blink-animation 1s ease-in-out infinite;
+      }
+      @keyframes blink-animation {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      .bar1 { animation: bar1-animation 2s ease-in-out infinite; }
+      .bar2 { animation: bar2-animation 2.5s ease-in-out infinite; }
+      .bar3 { animation: bar3-animation 1.8s ease-in-out infinite; }
+      @keyframes bar1-animation {
+        0%, 100% { height: 30; }
+        50% { height: 80; }
+      }
+      @keyframes bar2-animation {
+        0%, 100% { height: 60; }
+        50% { height: 40; }
+      }
+      @keyframes bar3-animation {
+        0%, 100% { height: 45; }
+        50% { height: 90; }
+      }
+      .rotate {
+        animation: rotate-animation 8s linear infinite;
+        transform-origin: center;
+      }
+      @keyframes rotate-animation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="800" height="400" fill="#0d1117"/>
+
+  <!-- Grid de fundo -->
+  <g opacity="0.1">
+    <defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#667eea" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="400" fill="url(#grid)"/>
+  </g>
+
+  <!-- Título -->
+  <text x="400" y="40" text-anchor="middle" fill="#e6e6e6" font-size="24" font-weight="bold" font-family="Arial">
+    Sistema de Análise de Sentimentos
+  </text>
+  <text x="400" y="65" text-anchor="middle" fill="#667eea" font-size="14" font-family="Arial">
+    LLM + PLN em Tempo Real
+  </text>
+
+  <!-- Usuardo/Cliente -->
+  <g class="float" transform="translate(100, 120)">
+    <circle cx="50" cy="50" r="40" fill="url(#apiGrad)" opacity="0.2"/>
+    <circle cx="50" cy="50" r="35" fill="url(#apiGrad)"/>
+    <!-- Ícone de usuário -->
+    <circle cx="50" cy="40" r="12" fill="#fff"/>
+    <path d="M 25 85 Q 50 60 75 85" fill="#fff"/>
+    <text x="50" y="110" text-anchor="middle" fill="#e6e6e6" font-size="12" font-family="Arial">Usuário</text>
+  </g>
+
+  <!-- API FastAPI -->
+  <g class="pulse" transform="translate(280, 100)">
+    <rect x="0" y="0" width="140" height="100" rx="10" fill="url(#apiGrad)" opacity="0.9"/>
+    <rect x="0" y="0" width="140" height="100" rx="10" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+    <text x="70" y="35" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold" font-family="Arial">FastAPI</text>
+    <text x="70" y="55" text-anchor="middle" fill="#e0e0e0" font-size="11" font-family="Arial">REST Endpoints</text>
+    <!-- Status LED -->
+    <circle cx="120" cy="20" r="8" fill="#38ef7d" class="blink"/>
+  </g>
+
+  <!-- Fluxo de dados animado -->
+  <g>
+    <path d="M 200 150 L 270 150" stroke="#667eea" stroke-width="2" fill="none" stroke-dasharray="5,5" class="flow"/>
+    <path d="M 430 150 L 500 150" stroke="#11998e" stroke-width="2" fill="none" stroke-dasharray="5,5" class="flow"/>
+    <path d="M 650 150 L 720 200" stroke="#fc4a1a" stroke-width="2" fill="none" stroke-dasharray="5,5" class="flow"/>
+  </g>
+
+  <!-- Modelo de Análise -->
+  <g class="float" transform="translate(500, 100)">
+    <rect x="0" y="0" width="150" height="120" rx="10" fill="url(#modelGrad)" opacity="0.9"/>
+    <text x="75" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold" font-family="Arial">Modelo PLN</text>
+
+    <!-- Ícones de modelos -->
+    <g transform="translate(25, 45)">
+      <rect x="0" y="0" width="30" height="25" rx="3" fill="#fff" opacity="0.3"/>
+      <text x="15" y="17" text-anchor="middle" fill="#fff" font-size="9" font-family="Arial">VADER</text>
+    </g>
+    <g transform="translate(60, 45)">
+      <rect x="0" y="0" width="30" height="25" rx="3" fill="#fff" opacity="0.3"/>
+      <text x="15" y="17" text-anchor="middle" fill="#fff" font-size="9" font-family="Arial">BERT</text>
+    </g>
+    <g transform="translate(95, 45)">
+      <rect x="0" y="0" width="30" height="25" rx="3" fill="#fff" opacity="0.3"/>
+      <text x="15" y="17" text-anchor="middle" fill="#fff" font-size="9" font-family="Arial">LLM</text>
+    </g>
+
+    <!-- Loading indicator -->
+    <circle class="rotate" cx="75" cy="100" r="10" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="15,25"/>
+  </g>
+
+  <!-- Dashboard -->
+  <g class="pulse" transform="translate(620, 220)">
+    <rect x="0" y="0" width="160" height="140" rx="10" fill="url(#dashGrad)" opacity="0.9"/>
+    <text x="80" y="25" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold" font-family="Arial">Dashboard</text>
+
+    <!-- Gráfico de barras animado -->
+    <g transform="translate(30, 40)">
+      <rect x="0" y="50" width="20" class="bar1" fill="#38ef7d" rx="2"/>
+      <rect x="25" y="50" width="20" class="bar2" fill="#f7b733" rx="2"/>
+      <rect x="50" y="50" width="20" class="bar3" fill="#fc4a1a" rx="2"/>
+    </g>
+
+    <!-- Labels -->
+    <text x="40" y="110" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial">Pos</text>
+    <text x="65" y="110" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial">Neu</text>
+    <text x="90" y="110" text-anchor="middle" fill="#fff" font-size="8" font-family="Arial">Neg</text>
+
+    <!-- Badge de tempo real -->
+    <rect x="50" y="115" width="60" height="18" rx="9" fill="#0d1117" opacity="0.8"/>
+    <text x="80" y="128" text-anchor="middle" fill="#38ef7d" font-size="9" font-weight="bold" font-family="Arial">● LIVE</text>
+  </g>
+
+  <!-- Painel de Análise em Tempo Real -->
+  <g transform="translate(180, 250)">
+    <rect x="0" y="0" width="420" height="120" rx="10" fill="#1a1f2e" stroke="#667eea" stroke-width="2"/>
+    <text x="210" y="25" text-anchor="middle" fill="#e6e6e6" font-size="12" font-family="Arial">📊 Análise em Tempo Real</text>
+
+    <!-- Texto sendo analisado -->
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="380" height="35" rx="5" fill="#0d1117"/>
+      <text x="10" y="22" fill="#38ef7d" font-size="12" font-family="Arial">
+        <tspan class="blink">"Adorei o produto! Qualidade excelente..."</tspan>
+      </text>
+    </g>
+
+    <!-- Resultado -->
+    <g transform="translate(20, 85)">
+      <!-- Sentimento -->
+      <rect x="0" y="0" width="100" height="25" rx="5" fill="#38ef7d" opacity="0.3"/>
+      <text x="50" y="17" text-anchor="middle" fill="#38ef7d" font-size="11" font-weight="bold" font-family="Arial">😊 POSITIVO</text>
+
+      <!-- Confiança -->
+      <rect x="120" y="0" width="120" height="25" rx="5" fill="#1a1f2e" stroke="#667eea"/>
+      <text x="180" y="17" text-anchor="middle" fill="#e6e6e6" font-size="11" font-family="Arial">Confiança:</text>
+      <rect x="240" y="5" width="60" height="15" rx="3" fill="url(#apiGrad)"/>
+      <text x="270" y="16" text-anchor="middle" fill="#fff" font-size="10" font-family="Arial">94%</text>
+
+      <!-- Modelo -->
+      <rect x="260" y="0" width="140" height="25" rx="5" fill="#1a1f2e"/>
+      <text x="330" y="17" text-anchor="middle" fill="#888" font-size="10" font-family="Arial">Modelo: VADER-PT</text>
+    </g>
+  </g>
+
+  <!-- Partículas animadas (decorativo) -->
+  <g opacity="0.5">
+    <circle cx="50" cy="350" r="3" fill="#667eea">
+      <animate attributeName="cy" values="350;330;350" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="370" r="2" fill="#38ef7d">
+      <animate attributeName="cy" values="370;350;370" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="750" cy="340" r="3" fill="#f7b733">
+      <animate attributeName="cy" values="340;320;340" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="390" text-anchor="middle" fill="#666" font-size="10" font-family="Arial">
+    Python • FastAPI • Transformers • Streamlit
+  </text>
+</svg>

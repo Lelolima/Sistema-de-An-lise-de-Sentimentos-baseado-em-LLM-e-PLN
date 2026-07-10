@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # API FastAPI
+  api:
+    build: .
+    container_name: sentiment-api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/sentimentos_db
+      - REDIS_URL=redis://redis:6379/0
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models
+    networks:
+      - sentiment-network
+    restart: unless-stopped
+
+  # Dashboard Streamlit
+  dashboard:
+    build: .
+    container_name: sentiment-dashboard
+    ports:
+      - "${DASHBOARD_PORT:-8050}:8050"
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+    networks:
+      - sentiment-network
+    restart: unless-stopped
+    command: ["streamlit", "run", "src/sentiment_analysis/dashboard/app.py", "--server.port=8050", "--server.address=0.0.0.0"]
+
+  # PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: sentiment-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sentimentos_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sentiment-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis (cache e celery)
+  redis:
+    image: redis:7-alpine
+    container_name: sentiment-redis
+    networks:
+      - sentiment-network
+    restart: unless-stopped
+
+  # Celery Worker (processamento assíncrono)
+  worker:
+    build: .
+    container_name: sentiment-worker
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/sentimentos_db
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - db
+    networks:
+      - sentiment-network
+    restart: unless-stopped
+    command: ["celery", "-A", "src.sentiment_analysis.tasks.celery_app", "worker", "--loglevel=info"]
+
+volumes:
+  postgres_data:
+
+networks:
+  sentiment-network:
+    driver: bridge

@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350">
+  <defs>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="positiveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#38ef7d;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#11998e;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="negativeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fc4a1a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f7b733;stop-opacity:1"/>
+    </linearGradient>
+    <style>
+      .typewriter {
+        animation: typewriter 0.1s steps(30) infinite alternate;
+      }
+      @keyframes typewriter {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .cursor {
+        animation: cursor 1s step-end infinite;
+      }
+      @keyframes cursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      .wave {
+        animation: wave 2s ease-in-out infinite;
+      }
+      @keyframes wave {
+        0%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(1.3); }
+      }
+      .float-slow {
+        animation: float-slow 4s ease-in-out infinite;
+      }
+      @keyframes float-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+      .glow {
+        animation: glow 2s ease-in-out infinite;
+      }
+      @keyframes glow {
+        0%, 100% { filter: drop-shadow(0 0 2px #38ef7d); }
+        50% { filter: drop-shadow(0 0 10px #38ef7d); }
+      }
+    </style>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="700" height="350" fill="#0a0a0a" rx="10"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="700" height="40" fill="#1a1a2e" rx="10"/>
+  <circle cx="20" cy="20" r="6" fill="#ff5f56"/>
+  <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="20" r="6" fill="#27c93f"/>
+  <text x="350" y="25" text-anchor="middle" fill="#888" font-size="11" font-family="monospace">análise-sentimentos → demo</text>
+
+  <!-- Área de texto -->
+  <g transform="translate(30, 70)">
+    <rect x="0" y="0" width="300" height="80" rx="5" fill="#1a1a2e" stroke="#333"/>
+    <text x="10" y="20" fill="#666" font-size="10" font-family="monospace">Entrada:</text>
+
+    <!-- Texto animado -->
+    <g transform="translate(10, 35)">
+      <rect x="0" y="0" width="280" height="35" rx="3" fill="#0d0d1a"/>
+      <text x="10" y="22" fill="#e6e6e6" font-size="11" font-family="monospace">
+        "Entrega rápida e produto
+      </text>
+      <text x="10" y="22" fill="#667eea" font-size="11" font-family="monospace" class="cursor">
+        <tspan x="140">|</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Processo de Análise -->
+  <g transform="translate(360, 60)">
+    <!-- Pipeline -->
+    <rect x="0" y="0" width="310" height="100" rx="8" fill="#161616" stroke="#333"/>
+    <text x="155" y="20" text-anchor="middle" fill="#666" font-size="10" font-family="monospace">Pipeline de Análise</text>
+
+    <!-- Etapas -->
+    <g transform="translate(15, 35)">
+      <!-- Clean -->
+      <g class="float-slow">
+        <rect x="0" y="0" width="60" height="45" rx="4" fill="#2d2d44"/>
+        <text x="30" y="20" text-anchor="middle" fill="#aaa" font-size="9" font-family="monospace">Clean</text>
+        <text x="30" y="35" text-anchor="middle" fill="#667eea" font-size="14" font-weight="bold">✓</text>
+      </g>
+
+      <!-- Tokenize -->
+      <g transform="translate(70, 0)" class="wave" style="animation-delay: 0.2s">
+        <rect x="0" y="0" width="60" height="45" rx="4" fill="#2d2d44"/>
+        <text x="30" y="20" text-anchor="middle" fill="#aaa" font-size="9" font-family="monospace">Tokens</text>
+        <text x="30" y="35" text-anchor="middle" fill="#667eea" font-size="14" font-weight="bold">12</text>
+      </g>
+
+      <!-- Analyze -->
+      <g transform="translate(140, 0)" class="wave" style="animation-delay: 0.4s">
+        <rect x="0" y="0" width="60" height="45" rx="4" fill="#2d2d44"/>
+        <text x="30" y="20" text-anchor="middle" fill="#aaa" font-size="9" font-family="monospace">Analyze</text>
+        <text x="30" y="35" text-anchor="middle" fill="#38ef7d" font-size="14" font-weight="bold">▶</text>
+      </g>
+
+      <!-- Score -->
+      <g transform="translate(210, 0)" class="glow">
+        <rect x="0" y="0" width="60" height="45" rx="4" fill="#1a3a2a"/>
+        <text x="30" y="20" text-anchor="middle" fill="#aaa" font-size="9" font-family="monospace">Score</text>
+        <text x="30" y="35" text-anchor="middle" fill="#38ef7d" font-size="12" font-weight="bold">0.94</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Resultado Positivo -->
+  <g transform="translate(30, 180)">
+    <rect x="0" y="0" width="300" height="140" rx="8" fill="url(#positiveGrad)" opacity="0.15" stroke="#38ef7d" stroke-width="2"/>
+
+    <!-- Emoji grande animado -->
+    <g transform="translate(50, 50)" class="glow">
+      <circle cx="30" cy="30" r="35" fill="#1a3a2a"/>
+      <!-- Olhos -->
+      <ellipse cx="18" cy="25" rx="5" ry="7" fill="#38ef7d"/>
+      <ellipse cx="42" cy="25" rx="5" ry="7" fill="#38ef7d"/>
+      <!-- Sorriso -->
+      <path d="M 15 40 Q 30 52 45 40" stroke="#38ef7d" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Labels -->
+    <text x="160" y="50" fill="#38ef7d" font-size="20" font-weight="bold" font-family="Arial">POSITIVO</text>
+    <text x="160" y="75" fill="#888" font-size="12" font-family="Arial">Sentimento detectado</text>
+
+    <!-- Métricas -->
+    <g transform="translate(160, 95)">
+      <text x="0" y="0" fill="#aaa" font-size="10" font-family="monospace">Confiança:</text>
+      <rect x="70" y="-8" width="100" height="14" rx="2" fill="#1a1a1a"/>
+      <rect x="72" y="-6" width="86" height="8" rx="1" fill="url(#positiveGrad)"/>
+      <text x="120" y="2" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">94%</text>
+
+      <text x="0" y="25" fill="#aaa" font-size="10" font-family="monospace">Polaridade:</text>
+      <text x="70" y="25" fill="#38ef7d" font-size="10" font-weight="bold" font-family="monospace">+0.87</text>
+
+      <text x="0" y="40" fill="#aaa" font-size="10" font-family="monospace">Modelo:</text>
+      <text x="70" y="40" fill="#667eea" font-size="10" font-family="monospace">VADER-PT</text>
+    </g>
+  </g>
+
+  <!-- Resultado Detalhado (Scores) -->
+  <g transform="translate(360, 180)">
+    <rect x="0" y="0" width="310" height="140" rx="8" fill="#1a1a2e" stroke="#333"/>
+    <text x="155" y="25" text-anchor="middle" fill="#e6e6e6" font-size="12" font-weight="bold" font-family="Arial">Distribuição</text>
+
+    <!-- Barras de score -->
+    <g transform="translate(30, 50)">
+      <!-- Positivo -->
+      <text x="0" y="0" fill="#38ef7d" font-size="10" font-family="monospace">Positivo</text>
+      <rect x="70" y="-10" width="180" height="12" rx="2" fill="#0d0d0d"/>
+      <rect x="70" y="-10" width="169" height="12" rx="2" fill="url(#positiveGrad)"/>
+      <text x="255" y="0" fill="#38ef7d" font-size="10" font-family="monospace">94%</text>
+
+      <!-- Neutro -->
+      <text x="0" y="35" fill="#f7b733" font-size="10" font-family="monospace">Neutro</text>
+      <rect x="70" y="25" width="180" height="12" rx="2" fill="#0d0d0d"/>
+      <rect x="70" y="25" width="9" height="12" rx="2" fill="url(#negativeGrad)"/>
+      <text x="255" y="35" fill="#f7b733" font-size="10" font-family="monospace">5%</text>
+
+      <!-- Negativo -->
+      <text x="0" y="70" fill="#fc4a1a" font-size="10" font-family="monospace">Negativo</text>
+      <rect x="70" y="60" width="180" height="12" rx="2" fill="#0d0d0d"/>
+      <rect x="70" y="60" width="2" height="12" rx="2" fill="#fc4a1a"/>
+      <text x="255" y="70" fill="#fc4a1a" font-size="10" font-family="monospace">1%</text>
+    </g>
+
+    <!-- Tempo de processamento -->
+    <g transform="translate(30, 110)">
+      <rect x="0" y="0" width="130" height="20" rx="3" fill="#0d0d0d"/>
+      <text x="65" y="14" text-anchor="middle" fill="#666" font-size="9" font-family="monospace">⚡ 23ms</text>
+    </g>
+  </g>
+
+  <!-- Linha de conexão -->
+  <path d="M 340 120 L 355 120" stroke="#333" stroke-width="2" stroke-dasharray="3,3"/>
+  <path d="M 340 250 L 355 250" stroke="#333" stroke-width="2" stroke-dasharray="3,3"/>
+</svg>
