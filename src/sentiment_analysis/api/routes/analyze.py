@@ -7,8 +7,8 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from loguru import logger
 
-from ..models.sentiment_analyzer import SentimentAnalyzer
-from ..models.base_model import Sentiment
+from ...models.sentiment_analyzer import SentimentAnalyzer
+from .history import record
 
 router = APIRouter()
 
@@ -51,6 +51,7 @@ async def analyze_text(request: AnalyzeRequest):
     try:
         analyzer = get_analyzer(request.model)
         result = analyzer.analyze(request.text)
+        record(result)
 
         return AnalyzeResponse(
             text=result.text,
@@ -59,6 +60,8 @@ async def analyze_text(request: AnalyzeRequest):
             scores=result.scores,
             model=result.model_name,
         )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Erro na análise: {e}")
         raise HTTPException(status_code=500, detail=f"Erro na análise: {str(e)}")
@@ -67,5 +70,4 @@ async def analyze_text(request: AnalyzeRequest):
 @router.get("/models")
 async def list_models():
     """Lista modelos disponíveis"""
-    analyzer = SentimentAnalyzer()
-    return {"models": analyzer.get_available_models()}
+    return {"models": SentimentAnalyzer.get_available_models()}

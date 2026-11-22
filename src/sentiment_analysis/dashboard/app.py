@@ -6,8 +6,16 @@ import streamlit as st
 from datetime import datetime
 from typing import List, Dict
 
-from ..models.sentiment_analyzer import SentimentAnalyzer
-from ..models.base_model import Sentiment
+try:
+    from ..models.base_model import Sentiment
+    from ..models.sentiment_analyzer import SentimentAnalyzer
+except ImportError:  # executado via `streamlit run .../app.py` (sem pacote pai)
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    from sentiment_analysis.models.base_model import Sentiment
+    from sentiment_analysis.models.sentiment_analyzer import SentimentAnalyzer
 
 
 def create_dashboard():
@@ -89,7 +97,7 @@ def create_dashboard():
     ]
 
     cols = st.columns(5)
-    for i, exemplo in enumerate(exempolos):
+    for i, exemplo in enumerate(exemplos):
         with cols[i]:
             if st.button(f"Ex {i+1}", key=f"ex{i}"):
                 st.session_state["exemplo_texto"] = exemplo

@@ -2,15 +2,27 @@
 Rotas para histórico de análises.
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 router = APIRouter()
 
 # Armazenamento em memória (ponytail: placeholder para banco de dados)
 _history: List[dict] = []
+MAX_HISTORY = 10_000
+
+
+def record(result) -> None:
+    """Registra um resultado de análise no histórico em memória."""
+    _history.append({
+        "text": result.text,
+        "sentiment": result.sentiment.value,
+        "confidence": result.confidence,
+        "analyzed_at": datetime.now(timezone.utc),
+    })
+    del _history[:-MAX_HISTORY]
 
 
 class HistoryEntry(BaseModel):
@@ -30,7 +42,7 @@ class HistoryResponse(BaseModel):
 
 
 @router.get("/", response_model=HistoryResponse)
-async def get_history(limit: Optional[int] = 50):
+async def get_history(limit: Optional[int] = Query(default=50, ge=0)):
     """
     Retorna histórico de análises.
 
@@ -43,8 +55,9 @@ async def get_history(limit: Optional[int] = 50):
 @router.post("/clear")
 async def clear_history():
     """Limpa o histórico"""
+    removed = len(_history)
     _history.clear()
-    return {"message": "Histórico limpo", "entries_removed": len(_history)}
+    return {"message": "Histórico limpo", "entries_removed": removed}
 
 
 @router.get("/stats")

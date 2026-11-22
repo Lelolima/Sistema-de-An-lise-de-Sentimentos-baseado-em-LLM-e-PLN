@@ -59,3 +59,36 @@ class TestAPI:
         data = response.json()
         assert "total" in data
         assert "results" in data
+
+class TestAPIRegressions:
+    """Regressões encontradas na auditoria de 2026-11-22."""
+
+    def setup_method(self):
+        client.post("/api/v1/history/clear")
+
+    def test_unknown_model_returns_400(self):
+        r = client.post("/api/v1/analyze/", json={"text": "good", "model": "nao-existe"})
+        assert r.status_code == 400
+
+    def test_blank_text_in_batch_returns_400(self):
+        r = client.post("/api/v1/batch/", json={"texts": ["good", "  "]})
+        assert r.status_code == 400
+
+    def test_history_records_and_clear_counts(self):
+        client.post("/api/v1/analyze/", json={"text": "I love it"})
+        client.post("/api/v1/batch/", json={"texts": ["great", "awful"]})
+        h = client.get("/api/v1/history/").json()
+        assert h["total"] == 3
+        stats = client.get("/api/v1/history/stats").json()
+        assert stats["positive"] == 2 and stats["negative"] == 1
+        r = client.post("/api/v1/history/clear").json()
+        assert r["entries_removed"] == 3
+
+    def test_history_negative_limit_rejected(self):
+        assert client.get("/api/v1/history/?limit=-1").status_code == 422
+
+    def test_health_has_real_timestamp(self):
+        from datetime import datetime
+
+        ts = client.get("/health").json()["timestamp"]
+        datetime.fromisoformat(ts)
