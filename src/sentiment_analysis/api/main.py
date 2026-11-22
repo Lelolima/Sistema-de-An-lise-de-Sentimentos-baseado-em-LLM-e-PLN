@@ -2,6 +2,8 @@
 Aplicação principal da API FastAPI.
 """
 
+from datetime import datetime, timezone
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
@@ -60,10 +62,12 @@ async def root():
 @api.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "timestamp": "now"}
+    return {"status": "healthy", "timestamp": datetime.now(timezone.utc).isoformat()}
 
 
 # Registra rotas
 api.include_router(analyze.router, prefix="/api/v1/analyze", tags=["Análise"])
 api.include_router(batch.router, prefix="/api/v1/batch", tags=["Batch"])
 api.include_router(history.router, prefix="/api/v1/history", tags=["Histórico"])
+# Alias exportado por api/__init__.py
+app = api

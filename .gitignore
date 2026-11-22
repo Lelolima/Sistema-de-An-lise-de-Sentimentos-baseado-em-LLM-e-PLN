@@ -45,8 +45,8 @@ ENV/
 *.pth
 *.bin
 *.onnx
-models/
-!models/.gitkeep
+/models/
+!/models/.gitkeep
 
 # Logs
 *.log

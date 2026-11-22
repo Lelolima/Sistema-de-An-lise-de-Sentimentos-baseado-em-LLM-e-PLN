@@ -7,8 +7,8 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
-from ..models.sentiment_analyzer import SentimentAnalyzer
-from ..models.base_model import Sentiment
+from ...models.sentiment_analyzer import SentimentAnalyzer
+from .history import record
 
 router = APIRouter()
 
@@ -65,6 +65,8 @@ async def analyze_batch(request: BatchAnalyzeRequest):
     try:
         analyzer = get_analyzer(request.model)
         results = analyzer.analyze_batch(request.texts)
+        for r in results:
+            record(r)
 
         # Converte resultados
         analyzed = [
@@ -90,5 +92,7 @@ async def analyze_batch(request: BatchAnalyzeRequest):
             summary=summary,
             model=results[0].model_name if results else request.model,
         )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro na análise em lote: {str(e)}")

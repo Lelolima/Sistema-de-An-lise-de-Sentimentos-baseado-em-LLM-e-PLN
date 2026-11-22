@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     # ============================================
     # Configurações de Modelos
     # ============================================
-    default_model: str = Field(default="bertabaporu-dimensional", env="DEFAULT_MODEL")
+    default_model: str = Field(default="vader", env="DEFAULT_MODEL")
     use_model_cache: bool = Field(default=True, env="USE_MODEL_CACHE")
     model_cache_dir: str = Field(default="./models/cache", env="MODEL_CACHE_DIR")
     use_quantization: bool = Field(default=False, env="USE_QUANTIZATION")
