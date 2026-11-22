@@ -1,0 +1,12 @@
+# Subconjunto leve usado no CI (API + testes); torch/transformers ficam fora.
+fastapi==0.165.0
+pydantic==2.14.4
+pydantic-settings==2.16.3
+loguru==0.8.0
+sqlalchemy==2.1.9
+PyJWT==2.15.0
+vaderSentiment==3.3.2
+httpx==0.28.1
+pytest==9.2.0
+pytest-cov==7.1.0
+ruff==0.17.3

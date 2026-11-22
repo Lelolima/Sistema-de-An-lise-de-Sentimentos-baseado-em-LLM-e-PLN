@@ -6,6 +6,21 @@
 
 Um sistema completo de análise de sentimentos combinando **Large Language Models (LLMs)** e **Processamento de Linguagem Natural (PLN)** para análise de texto em português e múltiplos idiomas.
 
+
+> ## ⚠️ Estado real da implementação (auditoria 2026-11-22)
+>
+> | Recurso | Situação |
+> |---|---|
+> | API FastAPI (`/health`, `/api/v1/analyze`, `/api/v1/batch`, `/api/v1/history`) | ✅ implementada e testada |
+> | Modelo `vader` | ✅ implementado (`vaderSentiment`). **Léxico em inglês**: textos em português tendem a sair `neutral` |
+> | Modelo `bert` | ⚙️ implementado, opcional (`pip install transformers torch`, baixa o modelo do Hugging Face na 1ª execução; nome via `BERT_MODEL_NAME`). Não executado no CI |
+> | GPT-4 / Llama / Groq | ❌ não implementado (as chaves do `.env.example` ainda não são usadas) |
+> | Coletores Twitter/Google, Celery/Redis, banco persistente | ❌ não implementados (histórico é em memória) |
+> | Dashboard Streamlit | ⚙️ implementado (`streamlit run src/sentiment_analysis/dashboard/app.py`) |
+> | Autenticação JWT | ⚙️ utilitário existe (`api/middleware/auth.py`), mas não está aplicado às rotas |
+>
+> Detalhes em [`docs/auditoria/AUDITORIA-2026-11-22.md`](docs/auditoria/AUDITORIA-2026-11-22.md).
+
 ---
 
 ## 🎯 Visão Geral do Sistema
@@ -185,8 +200,8 @@ for r in resultados:
 # Iniciar a API
 uvicorn src.sentiment_analysis.api.main:api --reload
 
-# Requisição
-curl -X POST "http://localhost:8000/api/v1/analyze" \
+# Requisição (atenção à barra final)
+curl -X POST "http://localhost:8000/api/v1/analyze/" \
      -H "Content-Type: application/json" \
      -d '{"text": "Produto excelente, recomendo!"}'
 ```
@@ -204,10 +219,10 @@ streamlit run src/sentiment_analysis/dashboard/app.py
 
 | Modelo | Tipo | Idioma | Uso |
 |--------|------|--------|-----|
-| `vader` | Léxico | PT-BR | Padrão/Baseline |
-| `bert` | Transformer | PT-BR | Alta precisão |
-| `gpt-4` | LLM | Multi | Via API |
-| `llama-3` | LLM | Multi | Local ou Groq |
+| `vader` | Léxico (`vaderSentiment`) | Inglês | Padrão/Baseline — implementado |
+| `bert` | Transformer (`cardiffnlp/twitter-xlm-roberta-base-sentiment` por padrão) | Multilíngue (inclui PT) | Opcional — implementado |
+| `gpt-4` | LLM | Multi | Planejado (não implementado) |
+| `llama-3` | LLM | Multi | Planejado (não implementado) |
 
 ---
 
@@ -226,14 +241,23 @@ O dashboard inclui:
 ## 🧪 Testes
 
 ```bash
-# Rodar todos os testes
-pytest
+# Instalação leve (sem torch) usada no CI
+pip install -r requirements-ci.txt
 
-# Com coverage
-pytest --cov=src
+# Lint + testes
+ruff check --select E9,F63,F7,F82 src tests main.py
+pytest -q
 
 # Testes específicos
 pytest tests/models/test_sentiment_analyzer.py
+```
+
+Resultado real em 2026-11-22: 29 passed. O CI (`.github/workflows/ci.yml`) roda lint,
+testes e `compileall` a cada push/PR, com `permissions: contents: read`.
+
+```bash
+# Demo (no Windows, use PYTHONIOENCODING=utf-8 por causa dos emojis)
+python main.py
 ```
 
 ---
